@@ -1,3 +1,8 @@
 model/both_bilstm.b13_s15_epoch8.chh filter=lfs diff=lfs merge=lfs -text
 model/both_bilstm.b51_s15_epoch8.cpg filter=lfs diff=lfs merge=lfs -text
 model/both_bilstm.b51_s15_epoch9.chg filter=lfs diff=lfs merge=lfs -text
+3rdparty/Pod5 filter=lfs diff=lfs merge=lfs -text
+3rdparty/argparse filter=lfs diff=lfs merge=lfs -text
+3rdparty/cnpy filter=lfs diff=lfs merge=lfs -text
+3rdparty/htslib filter=lfs diff=lfs merge=lfs -text
+3rdparty/threadpool filter=lfs diff=lfs merge=lfs -text

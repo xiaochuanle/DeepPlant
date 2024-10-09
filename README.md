@@ -52,17 +52,14 @@ sudo apt-get -y install cuda
 
 7. [ThreadPool](https://github.com/progschj/ThreadPool "ThreadPool"): A simple C++11 Thread Pool implementation (slightly modified from the original version in github)
 ```bash
-git clone https://github.com/huicongyao/Deep-Bam.git
-cd Deep-Bam/cpp
 mkdir build && cd build
-conda activate DeepPlant # Activate the previously created environment
 cmake -DCMAKE_PREFIX_PATH=`python -c 'import torch;print(torch.utils.cmake_prefix_path)'` .. # Determine the cmake path # if you haven`t set up the python environment, you should directy include libtorch path here.
 make -j
 ```
 
 ## DeepPlant Usage
 
-After successfully building the program, you can use our pre-trained model or train your own. The executable is located at `Deep-Bam/cpp/build/DeepPlant`.
+After successfully building the program, you can use our pre-trained model or train your own. The executable is located at `build/DeepPlant`.
 
 ### DeepPlant: Extracting High-Confidence Sites
 
@@ -81,23 +78,23 @@ Positional arguments:
   write_dir              Directory for output files, format: ${pod5filename}.npy 
   pos                    Positive high-accuracy methylation sites 
   neg                    Negative high-accuracy methylation sites 
-  kmer_size              K-mer size for feature extraction (default: 51)
-  num_workers            Number of workers in feature extraction thread pool, each handling one pod5 file and its corresponding SAM reads (default: 10)
+  kmer_size              K-mer size for feature extraction (default: 13)
+  num_workers            Number of workers in feature extraction thread pool, each handling one pod5 file and its corresponding SAM reads (default: 5)
   sub_thread_per_worker  Number of subthreads per worker (default: 4)
-  motif_type             Motif type, default: CG (default: "CG")
+  motif_type             Motif type (default: "CHH")
   loc_in_motif           Location in motif set 
 ```
 
 The extracted features are saved as `npz` files containing site information and data. Site info is stored as a tab-delimited string in a uint8 array, and the data array is used for training.
 
-The `extract_hc_sites` mode allows training of customized models on your data. After extraction, run the script `py/train_lstm.py` to train your model. Refer to the `README.md` in the py directory for further instructions.
+The `extract_hc_sites` mode allows training of customized models on your data. After extraction, run the script `py/train.py` to train your model. Refer to the `README.md` in the py directory for further instructions.
 
 ### DeepPlant: Extract and Call Modifications
 
 The process for calling modifications. 
 
 ```bash
-Usage: extract_and_call_mods [--help] [--version] pod5_dir bam_path reference_path ref_type write_file module_path kmer_size num_workers sub_thread_per_worker batch_size motif_type loc_in_motif
+Usage: extract_and_call_mods [--help] [--version] pod5_dir bam_path reference_path ref_type write_dir model_dir cpg_kmer_size chg_kmer_size chh_kmer_size num_workers sub_thread_per_worker batch_size
 
 Asynchronously extract features and pass data to the model for modification results.
 
@@ -106,13 +103,13 @@ Positional arguments:
   bam_path               Path to the BAM file (sorted by file name required) 
   reference_path         Path to the reference genome 
   ref_type               Reference genome type (default: "DNA")
-  write_dir             Path for the detailed modification results file 
-  module_dir            Path to the trained model 
+  write_dir             Path for the detailed modification results files 
+  model_dir            Path to the trained models 
   cpg_kmer_size         K-mer size for cpg feature extraction (default: 51)
   chg_kmer_size         K-mer size for chg feature extraction (default: 51)
   chh_kmer_size         K-mer size for chh feature extraction (default: 13)
-  num_workers            Number of workers in the feature extraction thread pool, each handling one pod5 file and its corresponding SAM reads (default: 10)
-  sub_thread_per_worker  Number of subthreads per worker (default: 4)
+  num_workers            Number of workers in the feature extraction thread pool, each handling one pod5 file and its corresponding SAM reads (default: 3)
+  sub_thread_per_worker  Number of subthreads per worker (default: 3)
   batch_size             Default batch size (default: 1024)
 ```
 
@@ -122,13 +119,9 @@ The `call_mods` process outputs a `tsv` file containing the following data:
 2. reference_start: Start position of the read on the reference genome
 3. reference_end: End position of the read on the reference genome
 4. chromosome: Reference name of the read on the reference genome
-5. pos_in_strand: Position of the current CpG site on the reference genome
+5. pos_in_reference: Position of the current cytosine sites on the reference genome
 6. strand: Aligned strand of the read on the reference (+/-)
-7. methylation_rate: Methylation rate of the current CpG sites as determined by the model.
+7. methylation_rate: Methylation rate of the current cytosine sites as determined by the model.
 
-You could find trained  torch script modules in `traced_script_module` file that contains different k-mer.
 
-## Publication
-
-...
 

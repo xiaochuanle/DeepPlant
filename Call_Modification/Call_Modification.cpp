@@ -148,7 +148,8 @@ void Yao::Call_Modification::call_mods(fs::path &pod5_dir,
                                  coverage_thresh_hold,
                                  identity_thresh_hold,
                                  std::ref(motifset),
-                                 loc_in_motif);
+                                 loc_in_motif,
+                                 "cpg");
         threads[i + 1] = std::thread(Yao::Model_Inference,
                                      std::ref(module),
                                      std::ref(dataQueue),
@@ -189,7 +190,8 @@ void Yao::Call_Modification::call_mods(fs::path &pod5_dir,
                                  coverage_thresh_hold,
                                  identity_thresh_hold,
                                  std::ref(motifset_2),
-                                 loc_in_motif);
+                                 loc_in_motif,
+                                 "chg");
         threads[i + 1] = std::thread(Yao::Model_Inference,
                                      std::ref(module_2),
                                      std::ref(dataQueue_2),
@@ -229,7 +231,8 @@ void Yao::Call_Modification::call_mods(fs::path &pod5_dir,
                                  coverage_thresh_hold,
                                  identity_thresh_hold,
                                  std::ref(motifset_3),
-                                 loc_in_motif);
+                                 loc_in_motif,
+                                 "chh");
         threads[i + 1] = std::thread(Yao::Model_Inference,
                                      std::ref(module_3),
                                      std::ref(dataQueue_3),

@@ -56,7 +56,6 @@ add_executable(
         3rdparty/cnpy/cnpy.cpp
         3rdparty/cnpy/cnpy.h
         3rdparty/threadpool/threadpool.h
-        3rdparty/threadpool/cxxpool.h
         3rdparty/argparse/argparse.h
 )
 

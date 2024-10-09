@@ -123,7 +123,8 @@ namespace Yao {
                                                 float coverage_thresh_hold,
                                                 float identity_thresh_hold,
                                                 std::set<std::string> &motifset,
-                                                size_t loc_in_motif);
+                                                size_t loc_in_motif,
+                                                std::string motif_type);
 
 // model running thread, get data from function `get_feature_for_model_with_thread_pool`
     void Model_Inference(torch::jit::script::Module &module,

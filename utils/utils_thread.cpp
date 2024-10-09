@@ -514,7 +514,8 @@ void Yao::get_feature_for_model_with_thread_pool(size_t num_workers,
                                                  float coverage_thresh_hold,
                                                  float identity_thresh_hold,
                                                  std::set<std::string> &motifset,
-                                                 size_t loc_in_motif) {
+                                                 size_t loc_in_motif,
+                                                 std::string motif_type) {
     spdlog::info("Start to get feature for call modification");
     const auto filename_to_path = Yao::get_filename_to_path(pod5_dir);
 
@@ -591,8 +592,8 @@ void Yao::get_feature_for_model_with_thread_pool(size_t num_workers,
                     inputs.clear();
                     file_cnt++;
                     spdlog::info("File {} enter to"\
-                         " thread pool, progress [{}/{}], current working thread: {}",
-                                 p5.get_filename(), file_cnt, filename_to_path.size(), thread_cnt);
+                         " thread pool, {} progress [{}/{}], current working thread: {}",
+                                 p5.get_filename(), motif_type, file_cnt, filename_to_path.size(), thread_cnt);
                 } catch (...) {
                     spdlog::error("Couldn't find file: {}", file_name_hold);
                     file_name_hold = sam_ptr->file_name;
@@ -634,8 +635,8 @@ void Yao::get_feature_for_model_with_thread_pool(size_t num_workers,
                 inputs.clear();
                 file_cnt++;
                 spdlog::info("File {} enter to"\
-                         " thread pool, progress [{}/{}]",
-                             p5.get_filename(), file_cnt, filename_to_path.size());
+                         " thread pool, {} progress [{}/{}]",
+                             p5.get_filename(), motif_type, file_cnt, filename_to_path.size());
             }
             catch (...) {
                 spdlog::error("Couldn't find file: {}", file_name_hold);
@@ -747,7 +748,7 @@ void Yao::count_modification_thread(
                                     std::condition_variable &cv2) {
     std::ofstream out;
     out.open(write_file);
-    out << "read_id\treference_start\treference_end\tchromosome\tpos_in_strand\tstrand\tmethylation_rate\n";
+    out << "read_id\treference_start\treference_end\tchromosome\tpos_in_reference\tstrand\tmethylation_rate\n";
     while (true) {
         std::unique_lock<std::mutex> lock(mtx2);
         cv2.wait(lock, [&site_key_Queue] {

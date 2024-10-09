@@ -49,8 +49,8 @@ int main(int argc, char **argv) {
             .help("num of sub thread per worker, total sub thread equals "
                   "(sizeof(pod5) + 100M) / 100M * sub_thread_per_worker");
     extract_hc_sites.add_argument("motif_type")
-            .default_value("CG")
-            .help("motif_type default CG");
+            .default_value("CHH")
+            .help("motif_type default CHH");
     extract_hc_sites.add_argument("loc_in_motif")
             .scan<'i', int>()
             .help("Location in motifset");
@@ -86,16 +86,16 @@ int main(int argc, char **argv) {
             .scan<'i', int>();
     extract_and_call_mods.add_argument("num_workers")
             .scan<'i', int>()
-            .default_value(4)
+            .default_value(3)
             .help("maximum Pod5 files that process parallelly");
     extract_and_call_mods.add_argument("sub_thread_per_worker")
             .scan<'i', int>()
-            .default_value(2)
+            .default_value(3)
             .help("num of sub thread per worker, total sub thread equals "
                   "(sizeof(pod5) + 100M) / 100M * sub_thread_per_worker");
     extract_and_call_mods.add_argument("batch_size")
             .scan<'i', int>()
-            .default_value(512)
+            .default_value(1024)
             .help("default batch size");
 
     program.add_subparser(extract_hc_sites);

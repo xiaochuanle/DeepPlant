@@ -238,13 +238,13 @@ std::vector<uint64_t> Yao::get_movetable(const bam1_t *b, int32_t & stride) {
 }
 
 std::string Yao::get_aux_tag_str(const bam1_t *b, const char tag[2]) {
-    kstring_t res = KS_INITIALIZE;    // 需要初始化
-    if(bam_aux_get_str(b,tag,&res) == 1) //kstring的string buffer 没有\0终止
+    kstring_t res = KS_INITIALIZE;  
+    if(bam_aux_get_str(b,tag,&res) == 1)
     {
         int len = ks_len(&res);
         char *ks_s = ks_str(&res);
         std::string s(ks_s, ks_s + len);
-        ks_free(&res); // 释放资源
+        ks_free(&res);
         return s;
     }
     else
@@ -283,8 +283,6 @@ std::vector<int32_t> Yao::group_signal_by_movetable(at::Tensor &signal_group,
                                     std::vector<uint64_t> &movetable,
                                     size_t stride,
                                     int64_t signal_len) {
-    // TODO: signal_duration not exactly equal to call_events * stride
-    // TODO: maybe this move * stride way is not right!
     assert(movetable[0] == 0);
     assert(trimed_signal.size(0) >= (int64_t) movetable.back());
     using namespace torch::indexing;

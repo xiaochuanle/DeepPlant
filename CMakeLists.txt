@@ -27,7 +27,7 @@ find_package(spdlog REQUIRED)
 
 link_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/Pod5/lib
-        ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/htslib/lib
+        ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/htslib
 )
 include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/Pod5/include

@@ -103,11 +103,11 @@ Positional arguments:
   bam_path               Path to the BAM file (sorted by file name required) 
   reference_path         Path to the reference genome 
   ref_type               Reference genome type (default: "DNA")
-  write_dir             Path for the detailed modification results files 
-  model_dir            Path to the trained models 
-  cpg_kmer_size         K-mer size for cpg feature extraction (default: 51)
-  chg_kmer_size         K-mer size for chg feature extraction (default: 51)
-  chh_kmer_size         K-mer size for chh feature extraction (default: 13)
+  write_dir              Path for the detailed modification results files 
+  model_dir              Path to the trained models 
+  cpg_kmer_size          K-mer size for cpg feature extraction (default: 51)
+  chg_kmer_size          K-mer size for chg feature extraction (default: 51)
+  chh_kmer_size          K-mer size for chh feature extraction (default: 13)
   num_workers            Number of workers in the feature extraction thread pool, each handling one pod5 file and its corresponding SAM reads (default: 3)
   sub_thread_per_worker  Number of subthreads per worker (default: 3)
   batch_size             Default batch size (default: 1024)

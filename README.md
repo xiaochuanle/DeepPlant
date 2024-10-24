@@ -51,7 +51,16 @@ sudo apt-get -y install cuda
 6. [cnpy](https://github.com/rogersce/cnpy "cnpy"): library to read/write .npy and .npz files in C/C++
 
 7. [ThreadPool](https://github.com/progschj/ThreadPool "ThreadPool"): A simple C++11 Thread Pool implementation (slightly modified from the original version in github)
+
+8. [htslib](https://github.com/samtools/htslib "htslib"): An implementation of a unified C library for accessing common file formats
+
 ```bash
+cd 3rdparty/htslib
+tar -xjf htslib-1.21.tar.bz2
+cd htslib-1.21
+make
+cp libhts.so ../
+cd ../../..
 mkdir build && cd build
 cmake -DCMAKE_PREFIX_PATH=`python -c 'import torch;print(torch.utils.cmake_prefix_path)'` .. # Determine the cmake path # if you haven`t set up the python environment, you should directy include libtorch path here.
 make -j
@@ -91,7 +100,7 @@ The `extract_hc_sites` mode allows training of customized models on your data. A
 
 ### DeepPlant: Extract and Call Modifications
 
-The process for calling modifications. 
+The process for calling modifications.
 
 ```bash
 Usage: extract_and_call_mods [--help] [--version] pod5_dir bam_path reference_path ref_type write_dir model_dir cpg_kmer_size chg_kmer_size chh_kmer_size num_workers sub_thread_per_worker batch_size

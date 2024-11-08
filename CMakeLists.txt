@@ -14,16 +14,17 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_COMPILER "/usr/bin/x86_64-linux-gnu-gcc-11")
 set(CMAKE_CXX_COMPILER "/usr/bin/x86_64-linux-gnu-g++-11")
 
-set(CUDA_TOOLKIT_ROOT_DIR /usr/local/cuda-11)
-set(CUDNN_INCLUDE_DIR /usr/local/cuda-11/include)
-set(CUDNN_LIBRARY /usr/local/cuda-11/lib64)
-set(CMAKE_CUDA_COMPILER /usr/local/cuda-11.8/bin/nvcc)
+set(CUDA_TOOLKIT_ROOT_DIR /usr/local/cuda)
+set(CUDNN_INCLUDE_DIR /usr/local/cuda/include)
+set(CUDNN_LIBRARY /usr/local/cuda/lib64)
+set(CMAKE_CUDA_COMPILER /usr/local/cuda/bin/nvcc)
 set(CAFFE2_USE_CUDNN TRUE)
 
 
 find_package(Torch REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(spdlog REQUIRED)
+find_package(CURL REQUIRED)
 
 link_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/Pod5/lib
@@ -69,4 +70,5 @@ target_link_libraries(
         "libpod5_format.so"
         "libhts.so"
         spdlog::spdlog_header_only
+        CURL::libcurl
 )

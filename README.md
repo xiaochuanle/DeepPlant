@@ -58,12 +58,16 @@ sudo apt-get -y install cuda
 cd 3rdparty/htslib
 tar -xjf htslib-1.21.tar.bz2
 cd htslib-1.21
+autoreconf -i
+./configure
 make
+make install
 cp libhts.so ../
 cd ../../..
 mkdir build && cd build
 cmake -DCMAKE_PREFIX_PATH=`python -c 'import torch;print(torch.utils.cmake_prefix_path)'` .. # Determine the cmake path # if you haven`t set up the python environment, you should directy include libtorch path here.
 make -j
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/
 ```
 
 ## DeepPlant Usage

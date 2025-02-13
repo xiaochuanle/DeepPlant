@@ -43,7 +43,7 @@ pip install numpy==1.26 torch==2.2.1
 
 ### Building the C++ Program
 
-DeepPlant was tested and runed in **NVIDIA L40s**,  ensure you have a **GPU**, and **CUDA Toolkit 11.8** is recommended. This C++ program is compiled using g++ 11.4.0 on Ubuntu 22.04.
+DeepPlant was tested and runed in **NVIDIA L40s**,  ensure you have a **GPU**, and **CUDA Toolkit 11.8** is recommended. This C++ program is compiled using **g++ 11.4.0** on **Ubuntu 22.04**.
 
 **Install the following packages before building the program:**
 

@@ -16,12 +16,12 @@ docker pull chenhx26/deepplant:1.1.0
 
 Please run the following command to test. If the GPU status is displayed, the installation is successful; otherwise, please check the installation of the NVIDIA Container Toolkit.
 ```bash
-docker run --rm --gpus all deepplant:1.1.0 nvidia-smi
+docker run --rm --gpus all chenhx26/deepplant:1.1.0 nvidia-smi
 ```
 
 Run the following command to start a container. The `data_path` is the directory containing the data to be processed. It is recommended to map it to the same path inside the container.
 ```bash
-docker run -i -t -v data_path:data_path:rw --gpus all deepplant:1.1.0 /bin/bash
+docker run -i -t -v data_path:data_path:rw --gpus all chenhx26/deepplant:1.1.0 /bin/bash
 ```
 
 You can directly run `DeepPlant extract_and_call_mods -h` to view the input parameters. The model directory is located at `/DeepPlant/model/bilstm`.
